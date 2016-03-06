@@ -1,0 +1,20 @@
+{
+  "name": "learn-gulp",
+  "version": "1.0.0",
+  "description": "A applicatie om te leren werken met gulp",
+  "main": "index.js",
+  "scripts": {
+    "test": "hello"
+  },
+  "author": "Floren de Gier",
+  "license": "Creative Commons",
+  "devDependencies": {
+    "bower": "^1.7.7",
+    "gulp": "^3.9.1",
+    "gulp-inject": "^3.0.0",
+    "gulp-sass": "^2.2.0"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  }
+}

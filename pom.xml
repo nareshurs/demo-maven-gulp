@@ -1,0 +1,125 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+
+   <groupId>com.altran.ig-java</groupId>
+   <artifactId>demo-maven-gulp</artifactId>
+   <version>1.0.0-SNAPSHOT</version>
+   <packaging>jar</packaging>
+   <properties>
+      <project.buid.sourceEncoding>UTF-8</project.buid.sourceEncoding>
+   </properties>
+
+   <build>
+      <resources>
+         <resource>
+            <directory>dist</directory>
+         </resource>
+      </resources>
+      <plugins>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-clean-plugin</artifactId>
+            <configuration>
+               <filesets>
+                  <fileset>
+                     <directory>bower_components</directory>
+                  </fileset>
+                  <fileset>
+                     <directory>node_modules</directory>
+                  </fileset>
+                  <fileset>
+                     <directory>dist</directory>
+                  </fileset>
+               </filesets>
+            </configuration>
+         </plugin>
+         <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>1.3.2</version>
+            <executions>
+               <!-- process dependencies in package.json -->
+               <execution>
+                  <id>npm install (initialize)</id>
+                  <goals>
+                     <goal>exec</goal>
+                  </goals>
+                  <phase>initialize</phase>
+                  <configuration>
+                     <executable>npm</executable>
+                     <arguments>
+                        <argument>install</argument>
+                     </arguments>
+                  </configuration>
+               </execution>
+
+               <!-- run bower to download required web dependencies -->
+               <execution>
+                  <id>npm run bower install (generate resources)</id>
+                  <goals>
+                     <goal>exec</goal>
+                  </goals>
+                  <phase>generate-resources</phase>
+                  <configuration>
+                     <executable>./node_modules/.bin/bower</executable>
+                     <arguments>
+                        <argument>install</argument>
+                     </arguments>
+                  </configuration>
+               </execution>
+
+               <!-- show configuration of npm -->
+               <execution>
+                  <id>npm config list (validate)</id>
+                  <goals>
+                     <goal>exec</goal>
+                  </goals>
+                  <phase>validate</phase>
+                  <configuration>
+                     <executable>npm</executable>
+                     <arguments>
+                        <argument>config</argument>
+                        <argument>ls</argument>
+                        <argument>-l</argument>
+                     </arguments>
+                  </configuration>
+               </execution>
+
+               <!-- execute the build step for gulp -->
+               <execution>
+                  <id>gulp build (compile)</id>
+                  <goals>
+                     <goal>exec</goal>
+                  </goals>
+                  <phase>compile</phase>
+                  <configuration>
+                     <executable>./node_modules/.bin/gulp</executable>
+                     <arguments>
+                        <argument>build</argument>
+                     </arguments>
+                  </configuration>
+               </execution>
+
+               <!-- execute the tests (if defined) on gulp-->
+               <execution>
+                  <id>gulp test (test)</id>
+                  <goals>
+                     <goal>exec</goal>
+                  </goals>
+                  <phase>test</phase>
+                  <configuration>
+                     <executable>./node_modules/.bin/gulp</executable>
+                     <arguments>
+                        <argument>test</argument>
+                     </arguments>
+                  </configuration>
+               </execution>
+
+            </executions>
+         </plugin>
+      </plugins>
+   </build>
+
+</project>

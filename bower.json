@@ -1,0 +1,23 @@
+{
+  "name": "learn-gulp",
+  "description": "A applicatie om te leren werken met gulp",
+  "main": "index.js",
+  "authors": [
+    "Floren"
+  ],
+  "license": "MIT",
+  "moduleType": [
+    "node"
+  ],
+  "homepage": "index.html",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "bootstrap-sass": "bootstrap-sass-official#^3.3.6"
+  }
+}

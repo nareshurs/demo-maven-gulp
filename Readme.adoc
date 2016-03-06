@@ -1,0 +1,4 @@
+= Maven Gulp demo
+
+A simple example demonstrating a way to integrate gulp in a maven build
+
