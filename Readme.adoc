@@ -2,3 +2,4 @@
 
 A simple example demonstrating a way to integrate gulp in a maven build
 
+This example is based on the work of https://phillipgreenii.github.io/
